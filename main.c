@@ -84,5 +84,7 @@ int main() {
 
     printf("\nresult: %s", res);
 
+    free(input_number);
+    free(res);
     return 0;
 }
