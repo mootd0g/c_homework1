@@ -6,7 +6,7 @@
 #define MAX_SIZE (size_t)256
 #define NUMS_SIZE (size_t)36
 
-char * translate_num_system(char * input_number, size_t old_base, size_t new_base, size_t num_length) {
+char * convert_num_system(char * input_number, size_t old_base, size_t new_base, size_t num_length) {
     char nums[NUMS_SIZE] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A',
                     'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'G', 'K', 'L', 'M', 'N',
                     'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
@@ -77,7 +77,7 @@ int main() {
     scanf("%s", input_number);
 
     size_t input_number_lenght = strlen(input_number);
-    char * res = translate_num_system(input_number, old_base, new_base, input_number_lenght);
+    char * res = convert_num_system(input_number, old_base, new_base, input_number_lenght);
     if (res == NULL) {
         printf("[error]");
     }
