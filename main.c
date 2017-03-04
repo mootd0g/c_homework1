@@ -29,9 +29,8 @@ char * convert_num_system(char * input_number, size_t old_base, size_t new_base,
         decimal_result += check * (size_t)pow(old_base, i);
     }
 
-    char * converted_number = malloc(MAX_SIZE * sizeof(char));
+    char * converted_number = calloc(MAX_SIZE, sizeof(char));
     if (convert_num_system == NULL) {
-        printf("[error]");
         return NULL;
     }
 
@@ -72,7 +71,7 @@ int main() {
         return 0;
     }
 
-    char * input_number = malloc(MAX_SIZE * sizeof(size_t));   
+    char * input_number = calloc(MAX_SIZE, sizeof(char));   
     if (input_number == NULL) {
         printf("[error]");
         return 0;
@@ -80,7 +79,7 @@ int main() {
     for (size_t i = 0; i < MAX_SIZE; ++i) 
          input_number[i] = '\0';
 
-    if ( scanf_s("%s", input_number, MAX_SIZE) != 1) {
+    if (scanf_s("%s", input_number, MAX_SIZE) != 1) {
         printf("[error]");
         free(input_number);
         return 0;      
