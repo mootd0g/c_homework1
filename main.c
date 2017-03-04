@@ -30,6 +30,11 @@ char * convert_num_system(char * input_number, size_t old_base, size_t new_base,
     }
 
     char * converted_number = malloc(MAX_SIZE * sizeof(char));
+    if (convert_num_system == NULL) {
+        printf("[error]");
+        return NULL;
+    }
+
     for (size_t i = 0; i < MAX_SIZE; i++)
         converted_number[i] = '\0';
 
@@ -41,12 +46,12 @@ char * convert_num_system(char * input_number, size_t old_base, size_t new_base,
         decimal_result = decimal_result / new_base;
     }
 
-   converted_number[pos] = nums[decimal_result];
+    converted_number[pos] = nums[decimal_result];
 
     for (size_t i = 0; i < (pos + 1) / 2; i++) {
         char backup = converted_number[i];
-       converted_number[i] = converted_number[pos - i];
-       converted_number[pos - i] = backup;
+        converted_number[i] = converted_number[pos - i];
+        converted_number[pos - i] = backup;
     }
 
     return converted_number;
@@ -54,7 +59,6 @@ char * convert_num_system(char * input_number, size_t old_base, size_t new_base,
 
 int main() {
     size_t old_base;
-    printf("first numerix: ");
     scanf("%d", &old_base);
     if ( old_base < 2 || old_base > 36 ) {
         printf("[error]");
@@ -62,27 +66,35 @@ int main() {
     }
 
     size_t new_base;
-    printf("\nsecond numerix: ");
     scanf("%d", &new_base);
-    if ( new_base > old_base || new_base < 2) {
+    if (new_base > old_base || new_base < 2) {
         printf("[error]");
         return 0;
     }
 
     char * input_number = malloc(MAX_SIZE * sizeof(size_t));   
-    for (int i = 0; i < MAX_SIZE; ++i) 
+    if (input_number == NULL) {
+        printf("[error]");
+        return 0;
+    }
+    for (size_t i = 0; i < MAX_SIZE; ++i) 
          input_number[i] = '\0';
 
-    printf("\nnumber: ");
-    scanf("%s", input_number);
+    if ( scanf_s("%s", input_number, MAX_SIZE) != 1) {
+        printf("[error]");
+        free(input_number);
+        return 0;      
+    }
 
     size_t input_number_lenght = strlen(input_number);
     char * res = convert_num_system(input_number, old_base, new_base, input_number_lenght);
     if (res == NULL) {
         printf("[error]");
+        free(input_number);
+        return 0;
     }
 
-    printf("\nresult: %s", res);
+    printf("%s", res);
 
     free(input_number);
     free(res);
